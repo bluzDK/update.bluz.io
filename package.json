@@ -7,7 +7,11 @@
   },
   "dependencies": {
     "express": "*",
-    "mysql": "*",
-    "request": "*"
+    "request": "*",
+    "body-parser": "*",
+    "particle-api-js": "*",
+    "http": "*",
+    "node-uuid": "*",
+    "download": "*"
   }
 }

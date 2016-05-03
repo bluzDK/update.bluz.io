@@ -118,3 +118,10 @@ app.get('/update/status/:downloadID', bodyParser.json(), function (req, res) {
 
     res.send('{"status": 1, "message": "update in progress"}');
 });
+
+//test page
+app.get('/test/', function (req, res) {
+    var uid = req.params.uid,
+        path = req.params[0] ? req.params[0] : 'test.html';
+    res.sendfile(path, {root: '.'});
+});

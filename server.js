@@ -1,7 +1,9 @@
 var express, particle, http, fs, bodyParser, uuid, url, path, download, request, util;
 
 express = require('express');
+cors = require('cors');
 app = express();
+app.use(cors());
 
 bodyParser = require('body-parser')
 

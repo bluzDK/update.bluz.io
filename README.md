@@ -20,9 +20,9 @@ Post a new update, which will immediately download the firmware files and flash 
 ####Arguments
 
 The following arguments must be passed in the data body:
-device: Device ID of the device to flash
-accessToken: Access Token for the device owners account
-files: List of files to be flashed
+- device: Device ID of the device to flash
+- accessToken: Access Token for the device owners account
+- files: List of files to be flashed
 
 ####Response:
 Code | Description 

@@ -79,7 +79,9 @@ app.post('/update/', bodyParser.json(), function (req, res) {
             });
     }
 
-    res.send('{"uuid":' + downloadID + '}');
+    res.send(JSON.stringify({
+	    uuid: downloadID
+    }));
 
 });
 
@@ -118,7 +120,10 @@ app.get('/update/status/:downloadID', bodyParser.json(), function (req, res) {
         return;
     }
 
-    res.send('{"status": 1, "message": "update in progress"}');
+    res.send(JSON.stringify({
+	    status: 1,
+        message: 'update in progress'
+    }));
 });
 
 //test page

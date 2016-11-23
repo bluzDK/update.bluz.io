@@ -47,11 +47,14 @@ var startUpdate = function(downloadID, device, accessToken, files) {
 
 app.post('/update/', bodyParser.json(), function (req, res) {
 
-    var host = req.get('host');
+    //if the request comes from staging.particle.io, then we should send the update there
     var origin = req.get('origin');
-
-    console.log("Host is " + host);
-    console.log("Origin is " + origin);
+    if (origin.endsWith('staging.particle.io')) {
+        api.baseUrl = 'https://api.staging.particle.io';
+    } else {
+        api.baseUrl = 'https://api.particle.io';
+    }
+    console.log("Particle URL is " + api.baseUrl);
 
     var device = req.body.device;
     var accessToken = req.body.accessToken;

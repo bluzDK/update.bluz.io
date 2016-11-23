@@ -47,6 +47,12 @@ var startUpdate = function(downloadID, device, accessToken, files) {
 
 app.post('/update/', bodyParser.json(), function (req, res) {
 
+    var host = req.get('host');
+    var origin = req.get('origin');
+
+    console.log("Host is " + host);
+    console.log("Origin is " + origin);
+
     var device = req.body.device;
     var accessToken = req.body.accessToken;
     var files = req.body.files;

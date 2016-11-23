@@ -50,11 +50,11 @@ app.post('/update/', bodyParser.json(), function (req, res) {
     //if the request comes from staging.particle.io, then we should send the update there
     var origin = req.get('origin');
     if (origin.endsWith('staging.particle.io')) {
-        api.baseUrl = 'https://api.staging.particle.io';
+        particle.baseUrl = 'https://api.staging.particle.io';
     } else {
-        api.baseUrl = 'https://api.particle.io';
+        particle.baseUrl = 'https://api.particle.io';
     }
-    console.log("Particle URL is " + api.baseUrl);
+    console.log("Particle URL is " + particle.baseUrl);
 
     var device = req.body.device;
     var accessToken = req.body.accessToken;

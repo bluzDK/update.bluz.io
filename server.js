@@ -8,7 +8,7 @@ app.use(cors());
 bodyParser = require('body-parser')
 
 var Particle = require('particle-api-js');
-particle = new Particle();
+
 http = require('http');
 fs = require('fs');
 uuid = require('node-uuid');
@@ -50,9 +50,10 @@ app.post('/update/', bodyParser.json(), function (req, res) {
     //if the request comes from staging.particle.io, then we should send the update there
     var origin = req.get('origin');
     if (origin.endsWith('staging.particle.io')) {
-        particle.baseUrl = 'https://api.staging.particle.io';
+        defaults = { baseUrl: 'https://api.staging.particle.io', clientSecret: 'particle-api', clientId: 'particle-api', tokenDuration: 7776000 };
+        particle = new Particle(defaults);
     } else {
-        particle.baseUrl = 'https://api.particle.io';
+        particle = new Particle();
     }
     console.log("Particle URL is " + particle.baseUrl);
 

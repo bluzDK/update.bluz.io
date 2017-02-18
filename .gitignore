@@ -1,0 +1,6 @@
+
+# Elastic Beanstalk Files
+test-env/
+*.pyc
+**/*.pyc
+.idea/

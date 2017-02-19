@@ -31,7 +31,8 @@ def bad_request(error=None):
         """
         message = {
             'status': 400,
-            'message': 'BadRequest: ' + request.url + (". Error: " + error if error is not None else ''),
+            'error': 'BadRequest: ' + request.url,
+            "message": error if error is not None else '',
         }
         resp = jsonify(message)
         resp.status_code = 400
@@ -48,7 +49,8 @@ def internal_error(error=None):
         """
         message = {
             'status': 500,
-            'message': 'ServerError: ' + request.url + (". Error: " + error if error is not None else ''),
+            'error': 'ServerError: ' + request.url,
+            "message": error if error is not None else '',
         }
         resp = jsonify(message)
         resp.status_code = 500

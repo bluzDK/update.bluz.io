@@ -1,3 +1,5 @@
+[![Deployment status from DeployBot](https://bluz.deploybot.com/badge/66802254036135/98581.svg)](http://deploybot.com)
+
 <p align="center" >
 <img src="http://bluz.io/static/img/logo.png" alt="" title="">
 </p>

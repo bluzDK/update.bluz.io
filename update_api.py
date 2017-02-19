@@ -6,7 +6,7 @@ import uuid
 import urllib
 import os
 
-from flask import Flask, request, session, g, url_for, request, jsonify
+from flask import Flask, request, session, g, url_for, Response, request, jsonify
 
 # create our app
 app = Flask(__name__)
@@ -18,8 +18,9 @@ CORS(app)
 # helper function to get the current time in millis()
 current_milli_time = lambda: int(round(time.time() * 1000))
 
-# url to send commmands to
-url = 'https://api.particle.io'
+#default return type to JSON, since this is really what we use
+class JSONResponse(Response):
+    default_mimetype = 'application/json'
 
 # will return 400 when called
 @app.errorhandler(400)
@@ -77,7 +78,8 @@ def update():
         return bad_request("Invalid parameters")
 
     try:
-        dir = create_dir()
+        id = str(uuid.uuid4())
+        dir = create_dir(id)
 
         for url in urls:
             # download file
@@ -91,14 +93,14 @@ def update():
             if not started:
                 raise Exception("Unable to start update")
 
-            os.rm(local_file)
+            os.remove(local_file)
 
         # finally, delete the directory
         os.rmdir(dir)
     except Exception as ex:
         return internal_error(ex.message)
 
-    return json.dumps({})
+    return JSONResponse(json.dumps({"uuid": id}))
 
 # Helper functions
 # ------------------------------------------------------------------------------
@@ -112,8 +114,8 @@ def get_payload(request):
     else:
         return request.args
 
-def create_dir():
-    path = '/tmp/'+str(uuid.uuid4())
+def create_dir(id):
+    path = '/tmp/'+id
     if not os.path.exists(path):
         os.makedirs(path)
     return path

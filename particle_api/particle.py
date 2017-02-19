@@ -30,7 +30,7 @@ class ParticleAPI:
                               'file': open(file, 'rb')
                           })
         response = json.loads(r.text)
-        if response["code"] == 200 and response["status"] == "Update started":
+        if r.status_code == 200:
             return True
         else:
             return False

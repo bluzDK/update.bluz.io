@@ -1,5 +1,5 @@
 from unittest import TestCase
-
+import uuid
 import sys
 sys.path.append("..")
 from update_api import *
@@ -11,7 +11,8 @@ class APITestCase(TestCase):
     """
 
     def test_create_dir(self):
-        dir = create_dir()
+        id = str(uuid.uuid4())
+        dir = create_dir(id)
         self.assertTrue(os.path.exists(dir))
 
         os.rmdir(dir)

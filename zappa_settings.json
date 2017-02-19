@@ -1,0 +1,10 @@
+{
+    "staging": {
+        "project_name": "update-api",
+        "app_function": "update_api.app", 
+        "s3_bucket": "zappa-update-api",
+        "cors": true,
+        "memory_size": 1024,
+        "timeout_seconds": 36
+    }
+}

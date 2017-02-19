@@ -38,6 +38,23 @@ def bad_request(error=None):
 
         return resp
 
+# will return 500 when called
+@app.errorhandler(500)
+def internal_error(error=None):
+        """
+        Handle 500 cases
+        :param error: String, the error to return
+        :return:
+        """
+        message = {
+            'status': 500,
+            'message': 'ServerError: ' + request.url + (". Error: " + error if error is not None else ''),
+        }
+        resp = jsonify(message)
+        resp.status_code = 500
+
+        return resp
+
 # Routes
 # ------------------------------------------------------------------------------
 @app.route('/version')
@@ -46,18 +63,38 @@ def version():
 
 @app.route('/update', methods=['POST'])
 def update():
-    params = get_payload(request)
+    try:
+        params = get_payload(request)
 
-    device = params['device']
-    accessToken = params['accessToken']
-    urls = params["files"]
-    localFiles = []
+        device = params['device']
+        access_token = params['accessToken']
+        urls = params["files"]
 
-    dir = create_dir()
+        env = "staging" if request.base_url.startswith("https://staging.particle.io") else "production"
+    except:
+        return bad_request("Invalid parameters")
 
-    for url in urls:
-        local_file = dir+'/'+filename_from_url(url)
-        urllib.urlretrieve(url, local_file)
+    try:
+        dir = create_dir()
+
+        for url in urls:
+            # download file
+            local_file = dir+'/'+filename_from_url(url)
+            urllib.urlretrieve(url, local_file)
+
+            #call particle flash for this file and device
+            particle = ParticleAPI(env)
+            started = particle.particle_flash(device, local_file, access_token)
+
+            if not started:
+                raise Exception("Unable to start update")
+
+            os.rm(local_file)
+
+        # finally, delete the directory
+        os.rmdir(dir)
+    except Exception as ex:
+        return internal_error(ex.message)
 
     return json.dumps({})
 

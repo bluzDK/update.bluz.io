@@ -1,13 +1,9 @@
 from unittest import TestCase
-import logging
 
 import sys
 sys.path.append("..")
 from update_api import *
 
-
-# Format log messages similar to: 2010-12-12 11:41:42,612: DEBUG: Your message here.
-logging.basicConfig(level=logging.DEBUG, format="%(asctime)s: %(levelname)s: %(message)s")
 
 class APITestCase(TestCase):
     """

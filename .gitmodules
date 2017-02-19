@@ -1,0 +1,3 @@
+[submodule "zappa_deploy"]
+	path = zappa_deploy
+	url = git@github.com:bluzDK/zappa_deploy.git

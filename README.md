@@ -35,5 +35,5 @@ Returns a UUID which can be used to check the status of the update
 
 #### Example:
 ```
-curl --header 'Content-Type:application/json; charset=UTF-8' -d '{"accessToken": "12345", "device": "b1e2abcd", "files": ["http://console.bluz.io/firmware/latest/bluz_dk/system-part1.bin"]}' https://update.bluz.io/update/
+curl --header 'Content-Type:application/json; charset=UTF-8' -d '{"accessToken": "12345", "device": "b1e2abcd", "files": ["http://console.bluz.io/firmware/latest/bluz_dk/system-part1.bin"]}' https://api.bluz.io/update/
 ```

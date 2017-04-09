@@ -60,7 +60,7 @@ def internal_error(error=None):
 
 # Routes
 # ------------------------------------------------------------------------------
-@app.route('/version')
+@app.route('/update/version')
 def version():
     return json.dumps({'version': api_version})
 

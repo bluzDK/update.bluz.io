@@ -11,7 +11,7 @@ Bluz is a Development Kit (DK) that implements the Wiring language and talks to 
 This app takes in files in the form of a URL and a device ID to flash the files to. The system then starts an update on the Particle cloud and status can be retreieved
 
 ## Endpoint
-All functions use the common endpoint https://update.bluz.io
+All functions use the common endpoint https://api.bluz.io
 
 ## Update
 /update/

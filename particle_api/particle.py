@@ -13,7 +13,7 @@ class ParticleAPI:
 
         :param env: 'production' or 'staging', used to determine url
         """
-        __environment = env
+        self.__environment = env
 
 
     def particle_flash(self, device, file, access_token):

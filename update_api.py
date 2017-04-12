@@ -73,6 +73,7 @@ def update():
         access_token = params['accessToken']
         urls = params["files"]
 
+        print "Base URL: " + str(request.base_url)
         env = "staging" if "staging.particle.io" in request.base_url else "production"
     except:
         return bad_request("Invalid parameters")

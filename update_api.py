@@ -73,8 +73,7 @@ def update():
         access_token = params['accessToken']
         urls = params["files"]
 
-        print "Remote URL: " + str(request.remote_addr)
-        env = "staging" if "staging.particle.io" in request.remote_addr else "production"
+        env = "staging" if 'HTTP_ORIGIN' in request.environ and request.environ['HTTP_ORIGIN'] is not None and "staging.particle.io" in request.environ['HTTP_ORIGIN'] else "production"
     except:
         return bad_request("Invalid parameters")
 
